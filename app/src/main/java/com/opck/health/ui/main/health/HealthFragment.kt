@@ -138,7 +138,7 @@ class HealthFragment : Fragment() {
             return
         }
 
-        val labels = sorted.map { (it.recordTime ?: "").takeLast(5) }  // "MM-DD"
+        val labels = sorted.map { extractDate(it.recordTime) }  // "MM-DD"
         val systolicEntries = sorted.mapIndexedNotNull { i, r ->
             r.systolic?.let { Entry(i.toFloat(), it.toFloat()) }
         }
@@ -169,6 +169,18 @@ class HealthFragment : Fragment() {
         binding.chartBp.data = LineData(sysSet, diaSet)
         binding.chartBp.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
         binding.chartBp.invalidate()
+    }
+
+    /**
+     * 从后端 ISO 8601 字符串里取 MM-DD.
+     * 例: "2026-07-05T12:30:43" → "07-05".
+     * 若格式不对, 截最后 5 个字符作为 fallback.
+     */
+    private fun extractDate(recordTime: String?): String {
+        if (recordTime.isNullOrBlank() || recordTime.length < 10) {
+            return ""
+        }
+        return recordTime.substring(5, 10)
     }
 
     private fun showInputDialog() {

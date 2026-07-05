@@ -11,9 +11,15 @@ import com.opck.health.HealthApp
 import com.opck.health.R
 import com.opck.health.data.local.TokenStore
 import com.opck.health.databinding.FragmentHomeBinding
+import com.opck.health.ui.archive.ArchiveActivity
+import com.opck.health.ui.article.ArticlesActivity
+import com.opck.health.ui.consultation.ConsultationsActivity
+import com.opck.health.ui.emergency.SosActivity
 import com.opck.health.ui.main.MainActivity
+import com.opck.health.ui.medicine.MedicineActivity
 import com.opck.health.ui.widget.HorizontalSpaceDecoration
 import com.opck.health.ui.widget.HomeArticleAdapter
+import android.content.Intent
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -78,12 +84,12 @@ class HomeFragment : Fragment() {
 
     private fun setupQuickEntries() {
         binding.quickRecord.setOnClickListener { (activity as? MainActivity)?.navigateToTab(R.id.tab_health) }
-        binding.quickMedicine.setOnClickListener { showToast("用药管理 D4 实现") }
-        binding.quickArchive.setOnClickListener { showToast("健康档案 D4 实现") }
+        binding.quickMedicine.setOnClickListener { startActivity(Intent(requireContext(), MedicineActivity::class.java)) }
+        binding.quickArchive.setOnClickListener { startActivity(Intent(requireContext(), ArchiveActivity::class.java)) }
         binding.quickChart.setOnClickListener { (activity as? MainActivity)?.navigateToTab(R.id.tab_health) }
-        binding.quickEmergency.setOnClickListener { showToast("紧急求救 D5 实现") }
-        binding.quickArticle.setOnClickListener { showToast("健康文章 D5 实现") }
-        binding.quickConsult.setOnClickListener { showToast("在线咨询 D6 实现") }
+        binding.quickEmergency.setOnClickListener { startActivity(Intent(requireContext(), SosActivity::class.java)) }
+        binding.quickArticle.setOnClickListener { startActivity(Intent(requireContext(), ArticlesActivity::class.java)) }
+        binding.quickConsult.setOnClickListener { startActivity(Intent(requireContext(), ConsultationsActivity::class.java)) }
         binding.quickMine.setOnClickListener { (activity as? MainActivity)?.navigateToTab(R.id.tab_mine) }
     }
 
