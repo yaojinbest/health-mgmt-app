@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  品牌圆形 logo 占位:
+  - 半透明白色圆形 + 2dp 边框
+  - 上层 TextView 居中放 emoji 🏥
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <solid android:color="#33FFFFFF" />
+
+    <stroke
+        android:width="2dp"
+        android:color="#80FFFFFF" />
+
+</shape>

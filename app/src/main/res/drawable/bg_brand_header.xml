@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  顶部品牌区背景:
+  - 主色 #67C23A 健康绿
+  - 底部 28dp 圆角, 让登录卡片"飘"在弧度之上
+  - 顶部圆角 0 (贴顶)
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="#67C23A" />
+
+    <corners
+        android:topLeftRadius="0dp"
+        android:topRightRadius="0dp"
+        android:bottomLeftRadius="28dp"
+        android:bottomRightRadius="28dp" />
+
+</shape>

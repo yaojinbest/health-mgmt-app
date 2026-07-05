@@ -2,7 +2,6 @@ package com.opck.health.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,9 +14,9 @@ import com.opck.health.ui.main.MainActivity
  * 登录页 - 入口 Activity
  *
  * 行为对齐 H5 patient portal 登录页:
- * - 默认登录模式
- * - 可切换到注册 (展开注册字段)
- * - 提供 demo 账号提示
+ * - 用户名 + 密码登录
+ * - demo 账号一键填入
+ * - 底部链接跳独立 RegisterActivity (D1.x 改造)
  */
 class LoginActivity : AppCompatActivity() {
 
@@ -26,8 +25,6 @@ class LoginActivity : AppCompatActivity() {
     private val viewModel: LoginViewModel by viewModels {
         LoginViewModelFactory(HealthApp.get().authRepository)
     }
-
-    private var isRegisterMode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,22 +44,18 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         binding.btnPrimary.setOnClickListener {
-            val username = binding.etUsername.text.toString()
+            val username = binding.etUsername.text.toString().trim()
             val password = binding.etPassword.text.toString()
-            if (isRegisterMode) {
-                val realName = binding.etRealName.text.toString()
-                val phone = binding.etPhone.text.toString()
-                val gender = binding.etGender.text.toString()
-                val age = binding.etAge.text.toString().toIntOrNull()
-                viewModel.register(username, password, realName, phone, gender, age)
-            } else {
-                viewModel.login(username, password, role = null)
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "请输入账号和密码", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+            viewModel.login(username, password, role = null)
         }
 
-        binding.btnToggleMode.setOnClickListener {
-            isRegisterMode = !isRegisterMode
-            applyMode()
+        // 跳独立注册页
+        binding.tvToRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
         // demo 账号一键填充
@@ -70,12 +63,6 @@ class LoginActivity : AppCompatActivity() {
             binding.etUsername.setText("user_wang")
             binding.etPassword.setText("root")
         }
-    }
-
-    private fun applyMode() {
-        binding.registerFields.visibility = if (isRegisterMode) View.VISIBLE else View.GONE
-        binding.btnPrimary.text = if (isRegisterMode) "注册并登录" else "登录"
-        binding.btnToggleMode.text = if (isRegisterMode) "已有账号，去登录" else "新用户注册"
     }
 
     private fun observeState() {
