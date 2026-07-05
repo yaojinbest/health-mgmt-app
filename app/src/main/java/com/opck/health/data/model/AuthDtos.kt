@@ -42,15 +42,33 @@ data class SysUser(
 /**
  * 登录响应 VO (含 token)
  *
- * 注意：后端字段是 snake_case (real_name), GSON 会用 @SerializedName 映射
+ * 后端实际响应结构:
+ * {
+ *   "code": 200,
+ *   "data": {
+ *     "user": { "id": 4, "username": "user_wang", "realName": "...", ... },
+ *     "doctor": null,
+ *     "token": "eyJ..."
+ *   }
+ * }
+ *
+ * 重要: id 在 user 子对象里, token 平级。
+ * 这里用扁平字段映射, 跟前端 TokenStore.saveLogin() 兼容。
+ *
+ * 用 Gson 反序列化时:
+ * 1. 反序列化整个 data 块到 LoginVO 会失败 (结构不匹配)
+ * 2. 用 LoginEnvelope 中转 (data: LoginVO) -> LoginVO (user, token)
+ * 3. AuthRepository 解析后扁平存 TokenStore
  */
 data class LoginVO(
-    val id: Long,
-    val username: String,
-    val realName: String?,
-    val phone: String?,
-    val role: String,
-    val gender: String?,
-    val age: Int?,
+    val user: SysUser? = null,
+    val doctor: Any? = null,
     val token: String
-)
+) {
+    /** 兼容旧 API: 让 HomeFragment 还能用 state.user.realName */
+    val id: Long get() = user?.id ?: 0L
+    val username: String get() = user?.username ?: ""
+    val realName: String? get() = user?.realName
+    val phone: String? get() = user?.phone
+    val role: String get() = user?.role ?: "USER"
+}
