@@ -2,6 +2,7 @@ package com.opck.health.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,7 @@ import com.opck.health.ui.main.MainActivity
  * - 用户名 + 密码登录
  * - demo 账号一键填入
  * - 底部链接跳独立 RegisterActivity (D1.x 改造)
+ * - 右上角齿轮跳 ServerConfigActivity (D2.x 服务器地址配置)
  */
 class LoginActivity : AppCompatActivity() {
 
@@ -40,6 +42,7 @@ class LoginActivity : AppCompatActivity() {
 
         setupListeners()
         observeState()
+        refreshServerHint()
     }
 
     private fun setupListeners() {
@@ -62,6 +65,11 @@ class LoginActivity : AppCompatActivity() {
         binding.tvDemoHint.setOnClickListener {
             binding.etUsername.setText("user_wang")
             binding.etPassword.setText("root")
+        }
+
+        // 齿轮 → 服务器地址设置
+        binding.btnServerSettings.setOnClickListener {
+            startActivity(Intent(this, ServerConfigActivity::class.java))
         }
     }
 
@@ -86,6 +94,28 @@ class LoginActivity : AppCompatActivity() {
                 else -> {}
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refreshServerHint()
+    }
+
+    /**
+     * 显示当前服务器地址 (齿轮下方小字)
+     * 仅当用户自定义过才显示
+     */
+    private fun refreshServerHint() {
+        val serverConfig = HealthApp.get().serverConfig
+        if (serverConfig.isCustomized()) {
+            val url = serverConfig.getServerUrl()
+            // 截短显示: http://192.168.1.100:8090/ → 192.168.1.100:8090
+            val display = url.removePrefix("http://").removePrefix("https://").trimEnd('/')
+            binding.tvCurrentServer.text = display
+            binding.tvCurrentServer.visibility = View.VISIBLE
+        } else {
+            binding.tvCurrentServer.visibility = View.GONE
+        }
     }
 
     private fun goMain() {

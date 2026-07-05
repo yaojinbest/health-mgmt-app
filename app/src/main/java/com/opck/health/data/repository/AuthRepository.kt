@@ -1,7 +1,6 @@
 package com.opck.health.data.repository
 
 import com.opck.health.data.api.HealthApi
-import com.opck.health.data.api.RetrofitClient
 import com.opck.health.data.local.TokenStore
 import com.opck.health.data.model.LoginRequest
 import com.opck.health.data.model.LoginVO
@@ -11,10 +10,16 @@ import com.opck.health.data.model.RegisterRequest
  * 认证仓库 - 业务层与 API 层解耦
  *
  * 调用流程: ViewModel -> AuthRepository -> HealthApi -> 后端
+ *
+ * 注意: api 改为外部注入 (HealthApp.onCreate 持 RetrofitClient.recreate() 后
+ *       重新 setApi, 这样换 baseUrl 时 Repository 也能拿到新实例)
  */
-class AuthRepository(private val tokenStore: TokenStore) {
+class AuthRepository(
+    private val tokenStore: TokenStore,
+    private val apiProvider: () -> HealthApi
+) {
 
-    private val api: HealthApi by lazy { RetrofitClient.create(tokenStore) }
+    val api: HealthApi get() = apiProvider()
 
     suspend fun login(username: String, password: String, role: String? = null): Result<LoginVO> {
         return runCatching {

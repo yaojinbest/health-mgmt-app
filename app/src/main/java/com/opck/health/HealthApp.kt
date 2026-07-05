@@ -3,6 +3,7 @@ package com.opck.health
 import android.app.Application
 import com.opck.health.data.api.HealthApi
 import com.opck.health.data.api.RetrofitClient
+import com.opck.health.data.local.ServerConfig
 import com.opck.health.data.local.TokenStore
 import com.opck.health.data.repository.AuthRepository
 import com.opck.health.data.repository.HealthRepository
@@ -23,13 +24,23 @@ class HealthApp : Application() {
     lateinit var api: HealthApi
         private set
 
+    lateinit var retrofitClient: RetrofitClient
+        private set
+
+    lateinit var serverConfig: ServerConfig
+        private set
+
     override fun onCreate() {
         super.onCreate()
         instance = this
         val tokenStore = TokenStore(this)
-        api = RetrofitClient.create(tokenStore)
-        authRepository = AuthRepository(tokenStore)
-        repository = HealthRepository(api)
+        serverConfig = ServerConfig(this)
+        retrofitClient = RetrofitClient(serverConfig, tokenStore)
+        api = retrofitClient.api()
+        // Repository 持有 apiProvider lambda, 总是拿最新 api 实例
+        // (避免 recreate() 后 Repository 还拿旧 baseUrl)
+        authRepository = AuthRepository(tokenStore) { retrofitClient.api() }
+        repository = HealthRepository { retrofitClient.api() }
     }
 
     companion object {

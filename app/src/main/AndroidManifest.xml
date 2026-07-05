@@ -37,6 +37,13 @@
             android:exported="false"
             android:theme="@style/Theme.HealthMgmt.NoActionBar" />
 
+        <activity
+            android:name=".ui.login.ServerConfigActivity"
+            android:exported="false"
+            android:label="服务器地址设置"
+            android:theme="@style/Theme.HealthMgmt.NoActionBar"
+            android:parentActivityName=".ui.login.LoginActivity" />
+
     </application>
 
 </manifest>

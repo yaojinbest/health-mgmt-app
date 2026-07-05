@@ -11,7 +11,9 @@ import com.opck.health.data.model.HealthData
  * 封装 viewModelScope.launch 之外的 .onSuccess / .onFailure
  *   -> 返回 Kotlin Result, 让 ViewModel 简单处理
  */
-class HealthRepository(private val api: HealthApi) {
+class HealthRepository(private val apiProvider: () -> HealthApi) {
+
+    private val api: HealthApi get() = apiProvider()
 
     suspend fun latestHealth(userId: Long): Result<HealthData?> {
         return runCatching {
