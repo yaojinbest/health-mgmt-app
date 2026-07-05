@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">健康管家</string>
+
+    <!-- Login Page -->
+    <string name="login_title">健康管家 · 患者端</string>
+    <string name="login_subtitle">登录后管理您的健康数据</string>
+    <string name="hint_username">账号</string>
+    <string name="hint_password">密码</string>
+    <string name="hint_real_name">姓名</string>
+    <string name="hint_phone">手机号</string>
+    <string name="hint_gender">性别 (男/女)</string>
+    <string name="hint_age">年龄</string>
+    <string name="btn_login">登录</string>
+    <string name="btn_register">注册并登录</string>
+    <string name="btn_to_register">新用户注册</string>
+    <string name="btn_to_login">已有账号，去登录</string>
+    <string name="demo_account_patient">演示: user_wang / root</string>
+
+    <!-- Main -->
+    <string name="tab_home">今日</string>
+    <string name="tab_data">健康</string>
+    <string name="tab_tools">工具</string>
+    <string name="tab_mine">我的</string>
+
+    <!-- Home -->
+    <string name="home_greeting_morning">早上好</string>
+    <string name="home_greeting_noon">中午好</string>
+    <string name="home_greeting_afternoon">下午好</string>
+    <string name="home_greeting_evening">晚上好</string>
+    <string name="home_today_overview">今日健康概览</string>
+    <string name="home_health_care">用心守护每一天</string>
+    <string name="home_status_normal">状态良好</string>
+    <string name="home_status_warning">有异常</string>
+    <string name="home_quick_service">快捷服务</string>
+    <string name="home_today_reminder">今日提醒</string>
+
+    <!-- Common -->
+    <string name="loading">处理中...</string>
+    <string name="retry">重试</string>
+    <string name="logout">退出登录</string>
+    <string name="back">返回</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="add">添加</string>
+    <string name="edit">编辑</string>
+    <string name="delete">删除</string>
+    <string name="empty_data">暂无数据</string>
+</resources>

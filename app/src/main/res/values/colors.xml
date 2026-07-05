@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 主色: 健康绿 (H5 的 #67C23A 也兼容) -->
+    <color name="primary">#67C23A</color>
+    <color name="primary_dark">#529B2E</color>
+    <color name="primary_light">#85CE61</color>
+
+    <!-- 辅色: 警告红 -->
+    <color name="danger">#F56C6C</color>
+    <color name="warning">#E6A23C</color>
+
+    <!-- 中性 -->
+    <color name="success">#67C23A</color>
+    <color name="info">#909399</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- 背景 -->
+    <color name="bg_page">#F5F7FA</color>
+    <color name="bg_card">#FFFFFF</color>
+    <color name="bg_header">#67C23A</color>
+
+    <!-- 文字 -->
+    <color name="text_primary">#303133</color>
+    <color name="text_regular">#606266</color>
+    <color name="text_secondary">#909399</color>
+    <color name="text_placeholder">#C0C4CC</color>
+    <color name="text_inverse">#FFFFFF</color>
+
+    <!-- 分割线 -->
+    <color name="divider">#EBEEF5</color>
+</resources>
