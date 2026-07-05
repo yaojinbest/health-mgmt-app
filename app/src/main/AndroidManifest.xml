@@ -44,6 +44,57 @@
             android:theme="@style/Theme.HealthMgmt.NoActionBar"
             android:parentActivityName=".ui.login.LoginActivity" />
 
+        <!-- D4: 用药管理 + 健康档案 -->
+        <activity
+            android:name=".ui.medicine.MedicineActivity"
+            android:exported="false"
+            android:label="用药管理"
+            android:theme="@style/Theme.HealthMgmt.NoActionBar" />
+
+        <activity
+            android:name=".ui.archive.ArchiveActivity"
+            android:exported="false"
+            android:label="健康档案"
+            android:theme="@style/Theme.HealthMgmt.NoActionBar" />
+
+        <!-- D5: SOS + 联系人 + 文章 -->
+        <activity
+            android:name=".ui.emergency.SosActivity"
+            android:exported="false"
+            android:label="紧急求救"
+            android:theme="@style/Theme.HealthMgmt.NoActionBar" />
+
+        <activity
+            android:name=".ui.emergency.ContactsActivity"
+            android:exported="false"
+            android:label="紧急联系人"
+            android:theme="@style/Theme.HealthMgmt.NoActionBar" />
+
+        <activity
+            android:name=".ui.article.ArticlesActivity"
+            android:exported="false"
+            android:label="健康文章"
+            android:theme="@style/Theme.HealthMgmt.NoActionBar" />
+
+        <activity
+            android:name=".ui.article.ArticleDetailActivity"
+            android:exported="false"
+            android:label="文章详情"
+            android:theme="@style/Theme.HealthMgmt.NoActionBar" />
+
+        <!-- D6: 在线咨询 -->
+        <activity
+            android:name=".ui.consultation.ConsultationsActivity"
+            android:exported="false"
+            android:label="在线咨询"
+            android:theme="@style/Theme.HealthMgmt.NoActionBar" />
+
+        <activity
+            android:name=".ui.consultation.ChatActivity"
+            android:exported="false"
+            android:label="咨询聊天"
+            android:theme="@style/Theme.HealthMgmt.NoActionBar" />
+
     </application>
 
 </manifest>

@@ -9,12 +9,20 @@ import androidx.fragment.app.Fragment
 import com.opck.health.HealthApp
 import com.opck.health.data.local.TokenStore
 import com.opck.health.databinding.FragmentMineBinding
+import com.opck.health.ui.article.ArticlesActivity
+import com.opck.health.ui.archive.ArchiveActivity
+import com.opck.health.ui.consultation.ConsultationsActivity
 import com.opck.health.ui.login.LoginActivity
+import com.opck.health.ui.login.ServerConfigActivity
+import com.opck.health.ui.medicine.MedicineActivity
 
 /**
- * 我的 tab - 个人信息 + 用药 + 档案入口 + 退出
+ * 我的 tab (D4-D6 入口)
  *
- * D4 完整实现
+ * - 用户卡片
+ * - 4 个入口: 用药管理 / 健康档案 / 在线咨询 / 健康文章
+ * - 服务器地址配置
+ * - 退出登录
  */
 class MineFragment : Fragment() {
 
@@ -40,7 +48,23 @@ class MineFragment : Fragment() {
             startActivity(Intent(requireContext(), LoginActivity::class.java))
             requireActivity().finish()
         }
-        // D4 接入: 用药管理 + 健康档案 + 找医生入口
+
+        binding.cardMedicine.setOnClickListener {
+            startActivity(Intent(requireContext(), MedicineActivity::class.java))
+        }
+        binding.cardArchive.setOnClickListener {
+            startActivity(Intent(requireContext(), ArchiveActivity::class.java))
+        }
+        binding.cardConsultation.setOnClickListener {
+            startActivity(Intent(requireContext(), ConsultationsActivity::class.java))
+        }
+        binding.cardArticles.setOnClickListener {
+            startActivity(Intent(requireContext(), ArticlesActivity::class.java))
+        }
+
+        binding.btnServerConfig.setOnClickListener {
+            startActivity(Intent(requireContext(), ServerConfigActivity::class.java))
+        }
     }
 
     override fun onDestroyView() {
