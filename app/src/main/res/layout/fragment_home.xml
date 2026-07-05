@@ -1,54 +1,391 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/bg_page"
-    android:padding="16dp">
+    android:background="@color/bg_page">
 
-    <!-- 顶部品牌区 (header) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@color/primary">
+        android:orientation="vertical">
 
+        <!-- ============ 顶部品牌区 (绿底, 跟登录页呼应) ============ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_brand_header"
+            android:paddingTop="32dp"
+            android:paddingBottom="56dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="今日健康概览"
+                android:textColor="#E8F5E9"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="您好，"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_real_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:text="用户" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="#C8E6C9"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="#C8E6C9"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <!-- ============ 健康概览卡片 (向上提, 飘在弧形上) ============ -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="-40dp"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="最近一次记录"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_last_record_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp"
+                    android:text="暂未录入" />
+
+                <!-- 警告级别提示 -->
+                <LinearLayout
+                    android:id="@+id/layout_warning"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_warning_normal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_warning_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✅"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tv_warning_text"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@color/text_primary"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <!-- 2x2 健康数据网格 -->
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:columnCount="2"
+                    android:rowCount="2"
+                    android:useDefaultMargins="false">
+
+                    <!-- 血压 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_column="0"
+                        android:layout_row="0"
+                        android:padding="12dp"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/bg_metric_card">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="血压"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_bp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:textColor="@color/text_primary"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:text="--" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="mmHg"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+
+                    <!-- 心率 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_column="1"
+                        android:layout_row="0"
+                        android:padding="12dp"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/bg_metric_card">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="心率"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_heart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:textColor="@color/text_primary"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:text="--" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="bpm"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+
+                    <!-- 血糖 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_column="0"
+                        android:layout_row="1"
+                        android:padding="12dp"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/bg_metric_card">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="血糖"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_sugar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:textColor="@color/text_primary"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:text="--" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="mmol/L"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+
+                    <!-- 步数 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_column="1"
+                        android:layout_row="1"
+                        android:padding="12dp"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/bg_metric_card">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="步数"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_steps"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:textColor="@color/text_primary"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:text="--" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="步"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+
+                </GridLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- ============ 快捷入口 ============ -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="今日健康概览"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp"
+            android:text="快捷服务"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:columnCount="4"
+            android:rowCount="2"
+            android:useDefaultMargins="false">
+
+            <!-- 8 个快捷入口 -->
+            <LinearLayout android:id="@+id/quick_record" style="@style/QuickEntry">
+                <TextView style="@style/QuickEntryIcon" android:text="📝" />
+                <TextView style="@style/QuickEntryText" android:text="录入数据" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/quick_medicine" style="@style/QuickEntry">
+                <TextView style="@style/QuickEntryIcon" android:text="💊" />
+                <TextView style="@style/QuickEntryText" android:text="用药管理" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/quick_archive" style="@style/QuickEntry">
+                <TextView style="@style/QuickEntryIcon" android:text="📋" />
+                <TextView style="@style/QuickEntryText" android:text="健康档案" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/quick_chart" style="@style/QuickEntry">
+                <TextView style="@style/QuickEntryIcon" android:text="📈" />
+                <TextView style="@style/QuickEntryText" android:text="趋势分析" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/quick_emergency" style="@style/QuickEntry">
+                <TextView style="@style/QuickEntryIcon" android:text="🚨" />
+                <TextView style="@style/QuickEntryText" android:text="紧急求救" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/quick_article" style="@style/QuickEntry">
+                <TextView style="@style/QuickEntryIcon" android:text="📚" />
+                <TextView style="@style/QuickEntryText" android:text="健康文章" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/quick_consult" style="@style/QuickEntry">
+                <TextView style="@style/QuickEntryIcon" android:text="💬" />
+                <TextView style="@style/QuickEntryText" android:text="在线咨询" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/quick_mine" style="@style/QuickEntry">
+                <TextView style="@style/QuickEntryIcon" android:text="👤" />
+                <TextView style="@style/QuickEntryText" android:text="我的" />
+            </LinearLayout>
+
+        </GridLayout>
+
+        <!-- ============ 最新文章 ============ -->
         <TextView
-            android:id="@+id/tv_real_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:text="用户" />
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"
+            android:text="健康资讯"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_role"
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_articles"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:nestedScrollingEnabled="false" />
 
     </LinearLayout>
 
-    <!-- D2 接入: 健康数据统计卡 + 快捷入口 -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:text="健康概览卡片 D2 实现"
-        android:textColor="@color/text_secondary"
-        android:textSize="14sp" />
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

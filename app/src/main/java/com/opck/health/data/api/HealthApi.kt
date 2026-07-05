@@ -26,6 +26,9 @@ import retrofit2.http.Query
 
 /**
  * REST API 定义 - 与后端 controller 一一对应
+ *
+ * 注: 所有路径都跟 Controller 的 @RequestMapping + 方法注解 一致。
+ *      后端 entity 字段已对齐 (snake_case -> camelCase, Lombok @Data 自动生成 getter)。
  */
 interface HealthApi {
 
@@ -57,70 +60,79 @@ interface HealthApi {
     suspend fun finishMedicine(@Path("id") id: Long): ApiResult<Any?>
 
     // ---- Emergency ----
+    // 后端: EmergencyController @RequestMapping("/api/emergency")
     @POST("api/emergency/contact/save")
     suspend fun saveContact(@Body req: EmergencyContact): ApiResult<EmergencyContact>
 
-    @GET("api/emergency/contact/list")
+    @GET("api/emergency/contacts")     // 注意: 是 contacts (复数)
     suspend fun listContacts(@Query("userId") userId: Long? = null): ApiResult<List<EmergencyContact>>
 
-    @DELETE("api/emergency/contact/{id}")
+    @POST("api/emergency/contact/delete/{id}")  // 后端用 @PostMapping 不是 DELETE
     suspend fun deleteContact(@Path("id") id: Long): ApiResult<Any?>
 
-    @POST("api/emergency/sos")
+    @POST("api/emergency/help")         // sos -> help
     suspend fun sendSos(@Body req: EmergencyRecord): ApiResult<EmergencyRecord>
 
     @GET("api/emergency/records")
     suspend fun listEmergencyRecords(@Query("userId") userId: Long? = null): ApiResult<List<EmergencyRecord>>
 
     // ---- Archive ----
+    // 后端: ArchiveController @RequestMapping("/api/archive")
     @POST("api/archive/save")
     suspend fun saveArchive(@Body req: HealthArchive): ApiResult<HealthArchive>
 
-    @GET("api/archive/get")
-    suspend fun getArchive(@Query("userId") userId: Long): ApiResult<HealthArchive>
+    @GET("api/archive/{userId}")        // 注意: 路径参数 userId, 不是 query
+    suspend fun getArchive(@Path("userId") userId: Long): ApiResult<HealthArchive>
 
-    @POST("api/archive/file/upload")
-    suspend fun uploadArchiveFile(@Body req: ArchiveFile): ApiResult<ArchiveFile>
+    @POST("api/archive/{archiveId}/upload")  // 文件上传, Body 里是 ArchiveFile
+    suspend fun uploadArchiveFile(@Path("archiveId") archiveId: Long, @Body req: ArchiveFile): ApiResult<ArchiveFile>
 
-    @GET("api/archive/file/list")
-    suspend fun listArchiveFiles(@Query("archiveId") archiveId: Long): ApiResult<List<ArchiveFile>>
+    @GET("api/archive/list")            // 注意: 没有 /file/ 前缀
+    suspend fun listArchiveFiles(): ApiResult<List<ArchiveFile>>
 
-    // ---- Article ----
-    @GET("api/article/list")
-    suspend fun listArticles(@Query("keyword") keyword: String? = null): ApiResult<List<HealthArticle>>
+    // ---- Articles (复数!) ----
+    // 后端: ArticleController @RequestMapping("/api/articles")
+    @GET("api/articles")
+    suspend fun listArticles(
+        @Query("category") category: String? = null,
+        @Query("keyword") keyword: String? = null,
+        @Query("diseaseTag") diseaseTag: String? = null
+    ): ApiResult<List<HealthArticle>>
 
-    @GET("api/article/{id}")
+    @GET("api/articles/{id}")
     suspend fun getArticle(@Path("id") id: Long): ApiResult<HealthArticle>
 
     // ---- Medical ----
-    @GET("api/medical/hospital/list")
+    // 后端: MedicalController @RequestMapping("/api/medical")
+    @GET("api/medical/hospitals")       // 注意: 复数
     suspend fun listHospitals(): ApiResult<List<Hospital>>
 
-    @GET("api/medical/department/list")
+    @GET("api/medical/departments")     // 注意: 复数
     suspend fun listDepartments(@Query("hospitalId") hospitalId: Long): ApiResult<List<Department>>
 
-    @GET("api/medical/doctor/list")
-    suspend fun listDoctors(@Query("departmentId") departmentId: Long): ApiResult<List<Doctor>>
+    @GET("api/medical/doctors")         // 注意: 复数
+    suspend fun listDoctors(@Query("departmentId") departmentId: Long? = null): ApiResult<List<Doctor>>
 
-    @GET("api/medical/doctor/all")
-    suspend fun listAllDoctors(): ApiResult<List<Doctor>>
+    @POST("api/medical/appointment/create")
+    suspend fun createAppointment(@Body req: Any): ApiResult<Any?>
 
-    // ---- Consultation ----
-    @POST("api/consultation/create")
+    @POST("api/medical/appointment/cancel/{id}")
+    suspend fun cancelAppointment(@Path("id") id: Long): ApiResult<Any?>
+
+    // ---- Consultations (复数!) ----
+    // 后端: ConsultationController @RequestMapping("/api/consultations")
+    @POST("api/consultations/create")
     suspend fun createConsultation(@Body req: Consultation): ApiResult<Consultation>
 
-    @GET("api/consultation/list")
+    @GET("api/consultations")           // 注意: 复数
     suspend fun listConsultations(@Query("userId") userId: Long? = null): ApiResult<List<Consultation>>
 
-    @GET("api/consultation/{id}/messages")
-    suspend fun listMessages(@Path("id") id: Long): ApiResult<List<ConsultationMessage>>
+    @GET("api/consultations/{consultationId}/messages")  // 路径参数名要跟后端 @PathVariable 一致
+    suspend fun listMessages(@Path("consultationId") id: Long): ApiResult<List<ConsultationMessage>>
 
-    @POST("api/consultation/{id}/message")
-    suspend fun sendMessage(
-        @Path("id") id: Long,
-        @Body message: ConsultationMessage
-    ): ApiResult<ConsultationMessage>
+    @POST("api/consultations/message/send")  // 注意: 不是 /{id}/message
+    suspend fun sendMessage(@Body message: ConsultationMessage): ApiResult<ConsultationMessage>
 
-    @POST("api/consultation/{id}/close")
+    @POST("api/consultations/close/{id}")
     suspend fun closeConsultation(@Path("id") id: Long): ApiResult<Any?>
 }

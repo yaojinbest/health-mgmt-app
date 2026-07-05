@@ -51,6 +51,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * 提供给子 Fragment 调用: 跳转到指定 tab
+     * 用法: (activity as? MainActivity)?.navigateToTab(R.id.tab_health)
+     */
+    fun navigateToTab(itemId: Int) {
+        binding.bottomNav.selectedItemId = itemId
+    }
+
     private fun switchTab(index: Int) {
         val fragment: Fragment = when (index) {
             0 -> HomeFragment()
