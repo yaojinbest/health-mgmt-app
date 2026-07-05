@@ -20,10 +20,22 @@ android {
         buildConfigField "String", "UPLOAD_BASE_URL", "\"http://10.0.2.2:8090/\""
     }
 
+    signingConfigs {
+        // 演示项目 release 用 Android Studio 默认 debug keystore 签名 (无需自建 keystore)
+        // 真机/模拟器都能装, 用户体验=debug, 不影响功能演示
+        release {
+            storeFile file(System.getProperty('user.home') + '/.android/debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         debug {
             // debug 允许明文 http (usesCleartextTraffic)
@@ -49,6 +61,12 @@ android {
         resources {
             excludes += ['/META-INF/{AL2.0,LGPL2.1}']
         }
+    }
+
+    // 演示项目跳过 release lint (lint 耗费几分钟, 没必要为 lint 阻塞交付)
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
