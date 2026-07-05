@@ -31,6 +31,16 @@ class HealthRepository(private val apiProvider: () -> HealthApi) {
         }
     }
 
+    /**
+     * 保存健康数据 (D3 录入表单提交)
+     */
+    suspend fun saveHealth(data: HealthData): Result<HealthData> {
+        return runCatching {
+            val resp = api.saveHealthData(data)
+            resp.data ?: throw IllegalStateException("服务器未返回保存的数据")
+        }
+    }
+
     suspend fun latestArticles(limit: Int = 3): Result<List<HealthArticle>> {
         return runCatching {
             val resp = api.listArticles(category = null, keyword = null, diseaseTag = null)

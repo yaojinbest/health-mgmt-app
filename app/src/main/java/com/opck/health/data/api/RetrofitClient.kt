@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit
  */
 class RetrofitClient(
     private val serverConfig: ServerConfig,
-    private val tokenStore: TokenStore
+    val tokenStore: TokenStore
 ) {
     @Volatile
     private var apiInstance: HealthApi? = null
