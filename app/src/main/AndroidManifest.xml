@@ -113,12 +113,6 @@
             android:label="我的预约"
             android:theme="@style/Theme.HealthMgmt.NoActionBar" />
 
-        <activity
-            android:name=".ui.admin.UsersAdminActivity"
-            android:exported="false"
-            android:label="用户管理"
-            android:theme="@style/Theme.HealthMgmt.NoActionBar" />
-
     </application>
 
 </manifest>

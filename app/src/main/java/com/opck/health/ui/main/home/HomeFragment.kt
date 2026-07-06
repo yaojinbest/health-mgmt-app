@@ -18,7 +18,6 @@ import com.opck.health.ui.dashboard.DashboardActivity
 import com.opck.health.ui.emergency.SosActivity
 import com.opck.health.ui.medical.MedicalActivity
 import com.opck.health.ui.medical.MyAppointmentsActivity
-import com.opck.health.ui.admin.UsersAdminActivity
 import com.opck.health.ui.main.MainActivity
 import com.opck.health.ui.medicine.MedicineActivity
 import com.opck.health.ui.widget.HorizontalSpaceDecoration
@@ -98,7 +97,6 @@ class HomeFragment : Fragment() {
         binding.quickDashboard.setOnClickListener { startActivity(Intent(requireContext(), DashboardActivity::class.java)) }
         binding.quickMedical.setOnClickListener { startActivity(Intent(requireContext(), MedicalActivity::class.java)) }
         binding.quickMyAppointments.setOnClickListener { startActivity(Intent(requireContext(), MyAppointmentsActivity::class.java)) }
-        binding.quickUsersAdmin.setOnClickListener { startActivity(Intent(requireContext(), UsersAdminActivity::class.java)) }
     }
 
     private fun setupArticles() {
