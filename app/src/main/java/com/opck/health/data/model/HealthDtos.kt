@@ -206,3 +206,5 @@ data class DoctorSchedule(
     val totalQuota: Int? = null,
     val remainQuota: Int? = null
 )
+
+

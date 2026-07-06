@@ -378,6 +378,11 @@
                 <TextView style="@style/QuickEntryText" android:text="我的预约" />
             </LinearLayout>
 
+            <LinearLayout android:id="@+id/quick_users_admin" style="@style/QuickEntry">
+                <TextView style="@style/QuickEntryIcon" android:text="👥" />
+                <TextView style="@style/QuickEntryText" android:text="用户管理" />
+            </LinearLayout>
+
         </GridLayout>
 
         <!-- ============ 最新文章 ============ -->

@@ -28,15 +28,16 @@ data class RegisterRequest(
  * 用户实体 (数据库 sys_user 表)
  */
 data class SysUser(
-    val id: Long,
-    val username: String,
-    val realName: String?,
-    @SerializedName("phone") val phone: String?,
-    val role: String,
-    val gender: String?,
-    val age: Int?,
-    val status: String?,
-    val createTime: String?
+    val id: Long? = null,
+    val username: String? = null,
+    val password: String? = null,
+    val realName: String? = null,
+    @SerializedName("phone") val phone: String? = null,
+    val role: String? = null,
+    val gender: String? = null,
+    val age: Int? = null,
+    val status: String? = null,
+    val createTime: String? = null
 )
 
 /**

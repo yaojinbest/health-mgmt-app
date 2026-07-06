@@ -8,6 +8,7 @@ import com.opck.health.data.model.Department
 import com.opck.health.data.model.Doctor
 import com.opck.health.data.model.EmergencyContact
 import com.opck.health.data.model.EmergencyRecord
+import com.opck.health.data.model.SysUser
 import com.opck.health.data.model.HealthArchive
 import com.opck.health.data.model.HealthArticle
 import com.opck.health.data.model.HealthData
@@ -127,6 +128,13 @@ interface HealthApi {
 
     @GET("api/medical/schedules")
     suspend fun listSchedules(@Query("doctorId") doctorId: Long): ApiResult<List<Map<String, Any>>>
+
+    // ---- Users (admin only) ----
+    @GET("api/users")
+    suspend fun listUsers(@Query("role") role: String? = null): ApiResult<List<SysUser>>
+
+    @POST("api/users/save")
+    suspend fun saveUser(@Body user: SysUser): ApiResult<SysUser>
 
     // ---- Consultations (复数!) ----
     // 后端: ConsultationController @RequestMapping("/api/consultations")
