@@ -14,6 +14,7 @@ import com.opck.health.databinding.FragmentHomeBinding
 import com.opck.health.ui.archive.ArchiveActivity
 import com.opck.health.ui.article.ArticlesActivity
 import com.opck.health.ui.consultation.ConsultationsActivity
+import com.opck.health.ui.dashboard.DashboardActivity
 import com.opck.health.ui.emergency.SosActivity
 import com.opck.health.ui.main.MainActivity
 import com.opck.health.ui.medicine.MedicineActivity
@@ -91,6 +92,7 @@ class HomeFragment : Fragment() {
         binding.quickArticle.setOnClickListener { startActivity(Intent(requireContext(), ArticlesActivity::class.java)) }
         binding.quickConsult.setOnClickListener { startActivity(Intent(requireContext(), ConsultationsActivity::class.java)) }
         binding.quickMine.setOnClickListener { (activity as? MainActivity)?.navigateToTab(R.id.tab_mine) }
+        binding.quickDashboard.setOnClickListener { startActivity(Intent(requireContext(), DashboardActivity::class.java)) }
     }
 
     private fun setupArticles() {

@@ -135,4 +135,28 @@ interface HealthApi {
 
     @POST("api/consultations/close/{id}")
     suspend fun closeConsultation(@Path("id") id: Long): ApiResult<Any?>
+
+    // ---- Dashboard (admin/doctor 统计页) ----
+    // 后端: DashboardController @RequestMapping("/api/dashboard")
+    @GET("api/dashboard/admin")
+    suspend fun dashboardAdmin(): ApiResult<Map<String, Any>>
+
+    @GET("api/dashboard/doctor/{doctorId}")
+    suspend fun dashboardDoctor(@Path("doctorId") doctorId: Long): ApiResult<Map<String, Any>>
+
+    // 后端: StatsController @RequestMapping("/api/admin/stats")
+    @GET("api/admin/stats/overview")
+    suspend fun statsOverview(): ApiResult<Map<String, Any>>
+
+    @GET("api/admin/stats/health-trends")
+    suspend fun statsHealthTrends(@Query("days") days: Int = 7): ApiResult<Map<String, Any>>
+
+    @GET("api/admin/stats/consultation-trends")
+    suspend fun statsConsultationTrends(@Query("days") days: Int = 7): ApiResult<Map<String, Any>>
+
+    @GET("api/admin/stats/user-distribution")
+    suspend fun statsUserDistribution(): ApiResult<Map<String, Any>>
+
+    @GET("api/admin/stats/warn-top")
+    suspend fun statsWarnTop(@Query("limit") limit: Int = 10): ApiResult<Map<String, Any>>
 }

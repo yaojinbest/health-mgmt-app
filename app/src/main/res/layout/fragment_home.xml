@@ -140,7 +140,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:columnCount="2"
-                    android:rowCount="2"
+                    android:rowCount="3"
                     android:useDefaultMargins="false">
 
                     <!-- 血压 -->
@@ -319,7 +319,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:columnCount="4"
-            android:rowCount="2"
+            android:rowCount="3"
             android:useDefaultMargins="false">
 
             <!-- 8 个快捷入口 -->
@@ -361,6 +361,11 @@
             <LinearLayout android:id="@+id/quick_mine" style="@style/QuickEntry">
                 <TextView style="@style/QuickEntryIcon" android:text="👤" />
                 <TextView style="@style/QuickEntryText" android:text="我的" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/quick_dashboard" style="@style/QuickEntry">
+                <TextView style="@style/QuickEntryIcon" android:text="📊" />
+                <TextView style="@style/QuickEntryText" android:text="数据统计" />
             </LinearLayout>
 
         </GridLayout>
