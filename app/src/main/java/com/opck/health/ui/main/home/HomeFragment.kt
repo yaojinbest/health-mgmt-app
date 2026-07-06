@@ -99,6 +99,10 @@ class HomeFragment : Fragment() {
         binding.quickMedical.setOnClickListener { startActivity(Intent(requireContext(), MedicalActivity::class.java)) }
         binding.quickMyAppointments.setOnClickListener { startActivity(Intent(requireContext(), MyAppointmentsActivity::class.java)) }
         binding.quickChart.setOnClickListener { startActivity(Intent(requireContext(), HealthDataChartActivity::class.java)) }
+        binding.quickRecord.setOnClickListener {
+            // 跳到 Health tab, 弹录入对话框
+            (activity as? com.opck.health.ui.main.MainActivity)?.navigateToTab(com.opck.health.R.id.tab_health)
+        }
     }
 
     private fun setupArticles() {
