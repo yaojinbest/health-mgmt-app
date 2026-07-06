@@ -8,6 +8,7 @@ import com.opck.health.ui.main.health.HealthFragment
 import com.opck.health.ui.main.home.HomeFragment
 import com.opck.health.ui.main.mine.MineFragment
 import com.opck.health.ui.main.tools.ToolsFragment
+import com.opck.health.ui.consultation.ConsultFragment
 
 /**
  * 主页面 - 5 个 BottomNav tab
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             0 -> HomeFragment()
             1 -> HealthFragment()
             2 -> ToolsFragment()
-            3 -> PlaceholderFragment.newInstance("在线咨询", "D6 完成")
+            3 -> ConsultFragment()
             4 -> MineFragment()
             else -> HomeFragment()
         }
