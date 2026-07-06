@@ -113,6 +113,12 @@
             android:label="我的预约"
             android:theme="@style/Theme.HealthMgmt.NoActionBar" />
 
+        <activity
+            android:name=".ui.health.HealthDataChartActivity"
+            android:exported="false"
+            android:label="健康数据图表"
+            android:theme="@style/Theme.HealthMgmt.NoActionBar" />
+
     </application>
 
 </manifest>
