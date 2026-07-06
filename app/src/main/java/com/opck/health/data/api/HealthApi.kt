@@ -119,6 +119,15 @@ interface HealthApi {
     @POST("api/medical/appointment/cancel/{id}")
     suspend fun cancelAppointment(@Path("id") id: Long): ApiResult<Any?>
 
+    @GET("api/medical/appointments")
+    suspend fun listAppointments(
+        @Query("userId") userId: Long? = null,
+        @Query("doctorId") doctorId: Long? = null
+    ): ApiResult<List<Map<String, Any>>>
+
+    @GET("api/medical/schedules")
+    suspend fun listSchedules(@Query("doctorId") doctorId: Long): ApiResult<List<Map<String, Any>>>
+
     // ---- Consultations (复数!) ----
     // 后端: ConsultationController @RequestMapping("/api/consultations")
     @POST("api/consultations/create")

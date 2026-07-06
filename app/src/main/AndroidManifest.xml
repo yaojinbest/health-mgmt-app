@@ -101,6 +101,18 @@
             android:label="数据统计"
             android:theme="@style/Theme.HealthMgmt.NoActionBar" />
 
+        <activity
+            android:name=".ui.medical.MedicalActivity"
+            android:exported="false"
+            android:label="预约就诊"
+            android:theme="@style/Theme.HealthMgmt.NoActionBar" />
+
+        <activity
+            android:name=".ui.medical.MyAppointmentsActivity"
+            android:exported="false"
+            android:label="我的预约"
+            android:theme="@style/Theme.HealthMgmt.NoActionBar" />
+
     </application>
 
 </manifest>

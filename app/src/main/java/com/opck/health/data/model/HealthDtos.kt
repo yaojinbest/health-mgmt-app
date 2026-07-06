@@ -172,3 +172,37 @@ data class ConsultationMessage(
     val content: String,
     val sendTime: String? = null
 )
+
+/**
+ * 预约
+ */
+data class Appointment(
+    val id: Long? = null,
+    val userId: Long? = null,
+    val userName: String? = null,
+    val hospitalId: Long? = null,
+    val hospitalName: String? = null,
+    val departmentId: Long? = null,
+    val departmentName: String? = null,
+    val doctorId: Long? = null,
+    val doctorName: String? = null,
+    val scheduleId: Long? = null,
+    val appointmentDate: String? = null,
+    val timeSlot: String? = null,
+    val status: String? = null,
+    val symptom: String? = null,
+    val createTime: String? = null,
+    val remindTime: String? = null
+)
+
+/**
+ * 医生排班
+ */
+data class DoctorSchedule(
+    val id: Long? = null,
+    val doctorId: Long? = null,
+    val scheduleDate: String? = null,
+    val timeSlot: String? = null,
+    val totalQuota: Int? = null,
+    val remainQuota: Int? = null
+)
